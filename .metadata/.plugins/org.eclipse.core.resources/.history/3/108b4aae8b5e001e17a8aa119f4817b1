@@ -1,0 +1,5 @@
+package com.todo.assignment.repositories;
+
+public interface TodoRepository {
+
+}

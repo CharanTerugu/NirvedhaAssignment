@@ -1,0 +1,47 @@
+
+<header>
+    <nav>
+      <ul>
+       <button (click)="logout()">Logout</button>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div class="container">
+    <h1>To-Do List</h1>
+    <span>{{msg}}</span>
+    <input [(ngModel)]="todos.title">
+    <button (click)="addTask()"> Add Task</button>
+    <ul>
+      <li *ngFor="let list of todoList; let i = index">
+        <span class="task-text">{{ list.title }}</span>
+        <div *ngIf="list.completed;else pending" style="color: rgb(0, 255, 89);">task completed</div>
+        <ng-template #pending>
+       
+          <p style="color: red;">task pending</p>
+        </ng-template>
+        <button class="edit-btn" (click)="completeTask(list)">
+          <p *ngIf="list.completed; else done" style="color: rgb(255, 0, 0);">Undo</p>
+          <ng-template #done>
+            <p style="color: rgb(0, 255, 89);">Done</p>
+          </ng-template>
+        </button>
+
+        <button class="edit-btn" (click)="editTask(list)">Edit</button>
+        <button class="delete-btn" (click)="deleteTask(list)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container" *ngIf="flag">
+    <label>Task Id</label>
+    <input type="number" name="taskId"[disabled]="true" [ngModel]="change.todoId">
+    <label>Title</label>
+    <input type="text" name="taskName" [(ngModel)]="change.title">
+    <label>Completed</label>
+    <input type="text" name="completed" [(ngModel)]="change.completed">
+<button (click)="submit()">Submit</button>
+
+  </div>
+  

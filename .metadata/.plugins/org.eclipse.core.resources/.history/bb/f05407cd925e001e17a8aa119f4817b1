@@ -1,0 +1,22 @@
+package com.todo.assignment.service.serviceimplementation;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.todo.assignment.entities.User;
+import com.todo.assignment.repositories.UserRepository;
+import com.todo.assignment.service.TodoService;
+
+@Service
+public class TodoServiceImpl implements TodoService {
+
+	@Autowired
+	UserRepository repo;
+	
+	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		user.setRoles("ROLE_USER");
+	}
+
+}

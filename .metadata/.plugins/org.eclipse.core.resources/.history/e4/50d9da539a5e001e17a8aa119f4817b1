@@ -1,0 +1,40 @@
+package com.todo.assignment.service.serviceimplementation;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.todo.assignment.entities.Todo;
+import com.todo.assignment.entities.User;
+import com.todo.assignment.repositories.TodoRepository;
+import com.todo.assignment.repositories.UserRepository;
+import com.todo.assignment.service.TodoService;
+import com.todo.assignment.service.UserService;
+
+@Service
+public class TodoServiceImpl implements TodoService {
+
+	@Autowired
+	TodoRepository repo;
+	@Autowired
+	UserService us;
+	
+	@Override
+	public void addTodo(Todo todo, String username) {
+		// TODO Auto-generated method stub
+		Optional<User> user=us.getUserByName(username);
+		todo.setUser(user.get());
+		repo.save(todo);
+	}
+
+	@Override
+	public List<Todo> getTodos(String username) {
+		// TODO Auto-generated method stub
+		return repo.getTodosByUserName(username);
+	}
+
+	
+
+}

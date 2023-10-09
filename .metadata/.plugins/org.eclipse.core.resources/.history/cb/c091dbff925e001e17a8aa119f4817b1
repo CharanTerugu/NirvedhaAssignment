@@ -1,0 +1,10 @@
+package com.todo.assignment.service.serviceimplementation;
+
+import org.springframework.stereotype.Service;
+
+import com.todo.assignment.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService{
+
+}

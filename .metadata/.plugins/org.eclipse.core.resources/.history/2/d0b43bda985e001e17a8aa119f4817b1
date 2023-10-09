@@ -1,0 +1,13 @@
+package com.todo.assignment.service;
+
+import org.springframework.stereotype.Service;
+
+import com.todo.assignment.entities.Todo;
+import com.todo.assignment.entities.User;
+
+@Service
+public interface TodoService {
+	
+	void addTodo(Todo todo,String username);
+
+}

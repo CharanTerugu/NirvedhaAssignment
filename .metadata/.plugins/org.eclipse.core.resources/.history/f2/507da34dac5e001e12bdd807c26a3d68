@@ -1,0 +1,37 @@
+package com.todo.assignment.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.todo.assignment.entities.Todo;
+import com.todo.assignment.service.TodoService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@RestController
+public class TodosController {
+	
+	@Autowired
+	TodoService ts;
+	
+	@PostMapping("/user/add/todo")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	void addTodo(@RequestBody Todo todo,HttpServletRequest request) {
+		String username=request.getUserPrincipal().getName();
+		ts.addTodo(todo, username);
+	}
+	
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	@GetMapping("/user/todos")
+	List<Todo> getTodos(HttpServletRequest request) {
+		String username=request.getUserPrincipal().getName();
+		return ts.getTodos(username);
+	}
+
+}
